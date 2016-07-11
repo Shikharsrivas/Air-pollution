@@ -1,0 +1,109 @@
+---
+  output: word_document
+---
+  ##########################################
+  # Na?ve Bayes in R
+  ##########################################
+  
+  Read the sample data
+```{r}
+# read the data into a table from the file
+
+sample <- read.table("datasetPredictability.csv",header=TRUE,sep=",")
+# define the data frames for the NB classifier
+traindata <- as.data.frame(sample[1:325,])
+testdata <- as.data.frame(sample[326,])
+traindata
+fit2 <- lm(NH3 ~ idnum + I(idnum^2), data=traindata)
+p1 <- ggplot(traindata, aes(x = idnum, y=NH3)) +
+  geom_line() +
+  geom_point()+  geom_hline(aes(yintercept=12))
+print(p1)
+summary(fit2)
+pred <- data.frame(idnum=300:400)
+pred$NH3 <- predict(fit2, newdata=pred)
+predict(fit2, newdata=pred, interval="pred")
+predict(fit2, newdata=pred, interval="confidence")
+p2<-p1 +
+  geom_point(color="red", data=pred)
+print(p2)
+
+
+fit2 <- lm(CO2 ~ idnum + I(idnum^2), data=traindata)
+p1 <- ggplot(traindata, aes(x = idnum, y=CO2)) +
+  geom_line() +
+  geom_point()+  geom_hline(aes(yintercept=0))
+print(p1)
+summary(fit2)
+pred <- data.frame(idnum=300:400)
+pred$CO2 <- predict(fit2, newdata=pred)
+predict(fit2, newdata=pred, interval="pred")
+predict(fit2, newdata=pred, interval="confidence")
+p3<-p1 +
+  geom_point(color="red", data=pred)
+print(p3)
+
+
+fit2 <- lm(CO ~ idnum + I(idnum^2), data=traindata)
+p1 <- ggplot(traindata, aes(x = idnum, y=CO)) +
+  geom_line() +
+  geom_point()+  geom_hline(aes(yintercept=150))
+print(p1)
+summary(fit2)
+pred <- data.frame(idnum=325:450)
+pred$CO <- predict(fit2, newdata=pred)
+predict(fit2, newdata=pred, interval="pred")
+predict(fit2, newdata=pred, interval="confidence")
+p2<-p1 +
+  geom_point(color="red", data=pred)
+print(p2)
+
+
+fit2 <- lm(pmx ~ idnum + I(idnum^2), data=traindata)
+p1 <- ggplot(traindata, aes(x = idnum, y=pmx)) +
+  geom_line() +
+  geom_point()+  geom_hline(aes(yintercept=0))
+print(p1)
+summary(fit2)
+pred <- data.frame(idnum=300:400)
+pred$pmx <- predict(fit2, newdata=pred)
+predict(fit2, newdata=pred, interval="pred")
+predict(fit2, newdata=pred, interval="confidence")
+p2<-p1 +
+  geom_point(color="red", data=pred)
+print(p2)
+
+
+fit2 <- lm(pmy ~ idnum + I(idnum^2), data=traindata)
+p1 <- ggplot(traindata, aes(x = idnum, y=pmy)) +
+  geom_line() +
+  geom_point()+  geom_hline(aes(yintercept=0))
+print(p1)
+summary(fit2)
+pred <- data.frame(idnum=300:400)
+pred$pmy <- predict(fit2, newdata=pred)
+predict(fit2, newdata=pred, interval="pred")
+predict(fit2, newdata=pred, interval="confidence")
+p2<-p1 +
+  geom_point(color="red", data=pred)
+print(p2)
+
+fit2 <- lm(X__rssi ~ idnum + I(idnum^2), data=traindata)
+p1 <- ggplot(traindata, aes(x = idnum, y=X__rssi)) +
+  geom_line() +
+  geom_point()+  geom_hline(aes(yintercept=0))
+print(p1)
+summary(fit2)
+pred <- data.frame(idnum=300:400)
+pred$X__rssi <- predict(fit2, newdata=pred)
+predict(fit2, newdata=pred, interval="pred")
+predict(fit2, newdata=pred, interval="confidence")
+p2<-p1 +
+  geom_point(color="red", data=pred)
+print(p2)
+
+
+```
+
+
+
